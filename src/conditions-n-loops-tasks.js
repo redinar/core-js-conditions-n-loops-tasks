@@ -21,8 +21,11 @@
  *  0  => true
  *  -5 => false
  */
-function isPositive(/* number */) {
-  throw new Error('Not implemented');
+function isPositive(number) {
+  if (number.toString()[0] === '-') {
+    return false;
+  }
+  return true;
 }
 
 /**
@@ -38,8 +41,11 @@ function isPositive(/* number */) {
  *  -5, 0, 5      => 5
  *  -0.1, 0, 0.2  => 0.2
  */
-function getMaxNumber(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getMaxNumber(a, b, c) {
+  let max = a;
+  if (b > max) max = b;
+  if (c > max) max = c;
+  return max;
 }
 
 /**
@@ -60,8 +66,17 @@ function getMaxNumber(/* a, b, c */) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  if (queen.x === king.x) {
+    return true;
+  }
+  if (queen.y === king.y) {
+    return true;
+  }
+  if (Math.abs(queen.x - king.x) === Math.abs(queen.y - king.y)) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -82,8 +97,15 @@ function canQueenCaptureKing(/* queen, king */) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  if (a > 0 && b > 0 && c > 0) {
+    if (a + b > c && a + c > b && b + c > a) {
+      if (a === b || b === c || a === c) {
+        return true;
+      }
+    }
+  }
+  return false;
 }
 
 /**
@@ -119,8 +141,60 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  function getCharacter(char) {
+    let character;
+    switch (char) {
+      case '-':
+        character = 'minus';
+        break;
+      case '.':
+      case ',':
+        character = 'point';
+        break;
+      case '0':
+        character = 'zero';
+        break;
+      case '1':
+        character = 'one';
+        break;
+      case '2':
+        character = 'two';
+        break;
+      case '3':
+        character = 'three';
+        break;
+      case '4':
+        character = 'four';
+        break;
+      case '5':
+        character = 'five';
+        break;
+      case '6':
+        character = 'six';
+        break;
+      case '7':
+        character = 'seven';
+        break;
+      case '8':
+        character = 'eight';
+        break;
+      case '9':
+        character = 'nine';
+        break;
+      default:
+        character = undefined;
+    }
+    return character;
+  }
+  let resultStr = '';
+  for (let i = 0; i < numberStr.length; i += 1) {
+    resultStr += getCharacter(numberStr[i]);
+    if (i < numberStr.length - 1) {
+      resultStr += ' ';
+    }
+  }
+  return resultStr;
 }
 
 /**
@@ -135,8 +209,12 @@ function convertNumberToString(/* numberStr */) {
  *  '0123210'   => true
  *  'qweqwe'    => false
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  let reversedStr = '';
+  for (let i = str.length - 1; i >= 0; i -= 1) {
+    reversedStr += str[i];
+  }
+  return reversedStr === str;
 }
 
 /**
@@ -153,8 +231,15 @@ function isPalindrome(/* str */) {
  *  'qwerty', 'Q'     => -1
  *  'qwerty', 'p'     => -1
  */
-function getIndexOf(/* str, letter */) {
-  throw new Error('Not implemented');
+function getIndexOf(str, letter) {
+  let index = -1;
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i] === letter) {
+      index = i;
+      break;
+    }
+  }
+  return index;
 }
 
 /**
@@ -172,8 +257,11 @@ function getIndexOf(/* str, letter */) {
  *  12345, 0    => false
  *  12345, 6    => false
  */
-function isContainNumber(/* num, digit */) {
-  throw new Error('Not implemented');
+function isContainNumber(num, digit) {
+  for (let i = 0; i < String(num).length; i += 1) {
+    if (String(digit) === String(num)[i]) return true;
+  }
+  return false;
 }
 
 /**
