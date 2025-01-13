@@ -122,8 +122,40 @@ function isIsoscelesTriangle(a, b, c) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  let result = '';
+  function singleDigits(number) {
+    let char = '';
+    if (number === '0') char = '';
+    if (number === '1') char = 'I';
+    if (number === '2') char = 'II';
+    if (number === '3') char = 'III';
+    if (number === '4') char = 'IV';
+    if (number === '5') char = 'V';
+    if (number === '6') char = 'VI';
+    if (number === '7') char = 'VII';
+    if (number === '8') char = 'VIII';
+    if (number === '9') char = 'IX';
+    if (number === '10') char = 'X';
+    return char;
+  }
+
+  function doubleDigits(number) {
+    let char = '';
+    if (number === '1') char = 'X';
+    if (number === '2') char = 'XX';
+    if (number === '3') char = 'XXX';
+    return char;
+  }
+
+  const str = String(num);
+  if (str.length === 1) {
+    result = singleDigits(str);
+  } else {
+    result = `${doubleDigits(str[0])}${singleDigits(str[1])}`;
+  }
+
+  return result;
 }
 
 /**
@@ -277,8 +309,20 @@ function isContainNumber(num, digit) {
  *  [2, 3, 9, 5] => 2       => 2 + 3 === 5 then balance element is 9 and its index = 2
  *  [1, 2, 3, 4, 5] => -1   => no balance element
  */
-function getBalanceIndex(/* arr */) {
-  throw new Error('Not implemented');
+function getBalanceIndex(arr) {
+  let sumLeft = 0;
+  let sumRight = 0;
+  for (let i = 0; i < arr.length; i += 1) {
+    sumRight += arr[i];
+  }
+  for (let i = 0; i < arr.length; i += 1) {
+    sumRight -= arr[i];
+    if (sumLeft === sumRight) {
+      return i;
+    }
+    sumLeft += arr[i];
+  }
+  return -1;
 }
 
 /**
